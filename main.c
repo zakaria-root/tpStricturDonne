@@ -18,7 +18,11 @@ int main(int argc, char const *argv[])
 
     table = ajouterContact(table, c1);
     afficherContact(table);
+    contact_t *contactChercher = chercherContact(table, c1);
+    afficherContact(contactChercher);
+
     
+
 
 
 
