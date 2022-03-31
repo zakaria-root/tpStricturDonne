@@ -23,7 +23,8 @@ int main(int argc, char const *argv[])
 
     table = supprimerContact(table,c1);
     afficherContact(table);
-
+    table = modifierContact(table, c1,c1);
+    afficherContact(table);
 
 
 

@@ -59,7 +59,7 @@ contactList_t *supprimerContact(contactTable_t *table, contact_t c1)
             temp = temp->suive;
             temp->pred = NULL;
             free(temp1);
-            table->table[index]->nbrContact = table->table[index]->nbrContact -1;
+            table->table[index]->nbrContact = table->table[index]->nbrContact - 1;
             return table;
         }
 
@@ -75,7 +75,7 @@ contactList_t *supprimerContact(contactTable_t *table, contact_t c1)
                 temp->suive->pred = temp->pred;
 
             free(temp1);
-            table->table[index]->nbrContact = table->table[index]->nbrContact -1;
+            table->table[index]->nbrContact = table->table[index]->nbrContact - 1;
         }
     }
     return table;
@@ -97,6 +97,7 @@ void afficherContact(contactTable_t *table)
 {
     for (int index = 0; index < table->nbGrpContact; index++)
     {
+        printf("table[%d] : \n", index);
         contactList_t *temp = table->table[index];
         while (temp != NULL)
         {
@@ -117,4 +118,27 @@ contactList_t *chercherContact(contactTable_t *table, contact_t contact1)
             contact = creeContact(temp->contact);
         return contact;
     }
+}
+
+contactTable_t *modifierContact(contactTable_t *table, contact_t c1, contact_t c2)
+{
+    char c = c1.nom[0];
+    int index = c - 65;
+
+    if (table->table[index]->nbrContact == 0)
+    {
+        printf("le tableau est vide \n");
+    }
+    else
+    {
+        contactList_t *temp = table->table[index];
+        
+        while (temp != NULL && (strcmp(temp->contact.nom, c1.nom) != 0))
+        {
+            temp = temp->suive;
+        }
+        if (temp != NULL)
+        temp->contact = c2;
+    }
+    return table;
 }
