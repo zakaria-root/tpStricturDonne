@@ -3,15 +3,16 @@
 #include "contactTable.h"
 #include <stdlib.h>
 
-contactTable_t* ajouterConatact(contactTable_t *table, contact_t contact1)
+contactTable_t* ajouterContact(contactTable_t *table, contact_t contact1)
 {
     char c = contact1.nom[0];
     int index  = c - 65;
     
     contactList_t *ct = creeContact(contact1);
-    if (table->table[index]->nbrContact)
+    if (table->table[index]->nbrContact == 0)
     {
         table->table[index] = ct;
+        table->table[index]->nbrContact = table->table[index]->nbrContact + 1;
     }
     else
     {
@@ -21,6 +22,7 @@ contactTable_t* ajouterConatact(contactTable_t *table, contact_t contact1)
             ct->suive = temp;
             temp->pred = ct;
             temp = ct;
+                    table->table[index]->nbrContact = table->table[index]->nbrContact + 1;
             return table;
         }
         
@@ -34,6 +36,8 @@ contactTable_t* ajouterConatact(contactTable_t *table, contact_t contact1)
             ct->pred = temp;
             temp->suive = ct;
         }
+                table->table[index]->nbrContact = table->table[index]->nbrContact + 1;
+
     }
     return table;
 }
@@ -60,6 +64,21 @@ void afficherContact(contactTable_t *table){
             printf("nom :%s - tel:%s - email:%s --> ",temp->contact.nom,temp->contact.tel,temp->contact.email );
         }
         
+    }
+    
+}
+
+contactList_t *chercherContact(contactTable_t * table, contact_t contact1){
+        contactList_t * contact =NULL;
+    for (int index = 0; index < table->nbGrpContact; index++)
+    {
+        contactList_t *temp = table->table[index];
+     while (temp != NULL && (strcmp(temp->contact.nom, contact1.nom) != 0))
+            temp = temp->suive;
+            if (temp!= NULL)
+            contact = creeContact(temp->contact);
+            return contact;
+            
     }
     
 }
