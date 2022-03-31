@@ -21,7 +21,9 @@ int main(int argc, char const *argv[])
     contact_t *contactChercher = chercherContact(table, c1);
     afficherContact(contactChercher);
 
-    
+    table = supprimerContact(table,c1);
+    afficherContact(table);
+
 
 
 
